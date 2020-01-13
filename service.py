@@ -1,12 +1,25 @@
 import json
 from flask import Flask, Response, request
 import redis
-import sys
+from datetime import datetime
 
 app = Flask(__name__)
 app.debug = True
 
 db = redis.Redis('localhost')
+
+def check_username(u):
+    if not u.isalpha():
+        raise ValueError('Username must contain letters only.')
+    else:
+        return 0
+
+def check_birthday_format(b):
+    try:
+        datetime.strptime(b, '%Y-%m-%d')
+        return 0
+    except ValueError:
+        raise ValueError('Date of Birth has to be in YYYY-MM-DD format.')
 
 @app.route('/')
 def hello():
@@ -14,21 +27,25 @@ def hello():
 
 @app.route('/hello/<username>', methods=['GET'])
 def get_username_data(username):
-    if username.isalpha() is False:
-        sys.stderr.write('Username must contain letters only.')
-        sys.exit(1)
+    check_username(username)
     resp = {}
-    output = db.get(username)
-    birthday = output.decode().replace("\'", "\"")
-    resp = json.loads(birthday)
-    return Response(json.dumps(resp), status=200, mimetype='application/json')
+    birthday = db.get(username).decode().replace("\'", "\"")
+    today = datetime.now()
+    for date in birthday.keys():
+        if date.date() < today.date():
+            resp = '{"message": "Hello, {}! Happy birthday!"}'.format(username)
+        else:
+            num_days = max(date, today).days
+            resp = '{"message": "Hello, {}! Your birthday is in {} days."}'.format(username, num_days)
+    final = json.loads(resp)
+    return Response(json.dumps(final), status=200, mimetype='application/json')
 
 @app.route('/hello/<username>', methods=['PUT'])
 def map_username_data(username):
-    if username.isalpha() is False:
-        print('Username must contain letters only.')
-        sys.exit(1)
+    check_username(username)
     data = request.get_json(force=True)
+    for key in data.keys():
+        check_birthday_format(data[key])
     if username:
         db.set(username, data)
     return Response(status=204)

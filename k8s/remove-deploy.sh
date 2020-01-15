@@ -1,2 +1,2 @@
-kubectl delete -f v1/service/service.yml
-kubectl delete -f v2/service/service-V2.yml
+kubectl delete -f v1/service.yml
+kubectl delete -f v2/service-V2.yml

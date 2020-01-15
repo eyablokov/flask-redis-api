@@ -46,11 +46,20 @@ cd k8s
 
 Wait till the single-node cluster is provisioned and ready for use.
 
+## Deploy Redis
+
+First of all, deploy Redis in EKS:
+
+```bash
+cd k8s
+./deploy-redis.sh
+```
+
 ## Deploy v1 of the application
 
 With the App Mesh and EKS cluster in place, we are all set to deploy and test our app.
 
-In case you want to use custom images pushed to your own Docker Hub account, update the Kubernetes artifacts with the image name by running the script `./config_deploy.sh`.
+In case you want to use custom images pushed to your own Docker Hub account, update the Kubernetes artifacts with the image name by running the script `./config-deploy.sh`.
 
 Go to the Kubernetes folder and execute the below command: `./deploy-v1.sh`
 
@@ -65,7 +74,7 @@ After making sure that you are in the `mesh` folder, execute the below command t
 Now, deploy the Kubernetes pod for v2 which is already mapped to the v2 virtual node in App Mesh:
 
 ```bash
-cd ../Kubernetes
+cd k8s
 ./deploy-v2.sh
 ```
 
@@ -80,7 +89,7 @@ cd ../mesh
 
 When you repeatedly access the service through the ELB, you can see that version of the service is reflecting 2.0.
 
-Open the file `canary.json` file, located at `mesh/v2/service` folder. Update the weights to 50 for the virtual node.
+Open the file `canary.json` file, located at `mesh/v2` folder. Update the weights to 50 for the virtual node.
 
 Apply the updated policy to App Mesh by executing the `deploy-canary-v2.sh` script.
 
@@ -103,5 +112,3 @@ As AWS App Mesh moves towards general availability, we can see additional featur
 ## TODO
 
 There are no tests here, for both - API app itself & deploy.
-
-Split Flask & Redis into separate services. Redis service isn't described here yet.

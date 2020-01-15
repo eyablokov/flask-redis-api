@@ -6,7 +6,7 @@ import redis
 app = Flask(__name__)
 app.debug = True
 
-db = redis.Redis('localhost')
+db = redis.Redis('redis')
 
 def check_username(u):
     if not u.isalpha():

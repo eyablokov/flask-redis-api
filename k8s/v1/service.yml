@@ -13,11 +13,11 @@ spec:
       - name: service
         image: service
         imagePullPolicy: Always
-        env:       
+        env:
         - name: "SVC_NAME"
-          value: "service"                  
+          value: "service"
         - name: "SVC_VER"
-          value: "1.0"                  
+          value: "1.0"
         ports:
         - name: service
           containerPort: 5000
@@ -51,8 +51,8 @@ spec:
             - name: "APPMESH_APP_PORTS"
               value: "5000"
             - name: "APPMESH_EGRESS_IGNORED_IP"
-              value: "169.254.169.254"          
----          
+              value: "169.254.169.254"
+---
 apiVersion: v1
 kind: Service
 metadata:

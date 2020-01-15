@@ -12,7 +12,7 @@
     ],
     "serviceDiscovery": {
       "dns": {
-        "serviceName": "my.default.svc.cluster.local"
+        "serviceName": "service.default.svc.cluster.local"
       }
     }
   }

@@ -35,14 +35,16 @@ def get_username_data(username):
     for birth in date_dict.values():
         datetime_birth = datetime.datetime.strptime(birth, '%Y-%m-%d').date()
         if datetime_birth == today:
-            return 'Hello, {}! Happy birthday!'.format(username)
+            line = '{"message":"Hello, '+ username + '! Happy birthday!" }'
+            return json.loads(line)
         if (today.month == datetime_birth.month and today.day >= datetime_birth.day or today.month > datetime_birth.month):
             nextBirthdayYear = today.year + 1
         else:
             nextBirthdayYear = today.year
         nextBirthday = datetime.date(nextBirthdayYear, datetime_birth.month, datetime_birth.day)
         diff = nextBirthday - today
-        return 'Hello, {}! Your birthday is in {} day(s)'.format(username, diff.days)
+        line = '{"message":"Hello, ' + username + '! Your birthday is in ' + str(diff.days) + ' day(s)"}'
+        return json.loads(line)
 
 @app.route('/hello/<username>', methods=['PUT'])
 def map_username_data(username):

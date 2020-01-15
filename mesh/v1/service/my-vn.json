@@ -1,0 +1,19 @@
+{
+  "meshName": "mymesh",
+  "virtualNodeName": "my-vn",
+  "spec": {
+    "listeners": [
+      {
+        "portMapping": {
+          "port": 5000,
+          "protocol": "http"
+        }
+      }
+    ],
+    "serviceDiscovery": {
+      "dns": {
+        "serviceName": "my.default.svc.cluster.local"
+      }
+    }
+  }
+}

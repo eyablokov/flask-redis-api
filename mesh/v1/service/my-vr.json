@@ -1,0 +1,9 @@
+{
+  "meshName": "mymesh",
+  "virtualRouterName": "my-vr",
+  "spec": {
+    "serviceNames": [
+      "my.default.svc.cluster.local"
+    ]
+  }  
+}

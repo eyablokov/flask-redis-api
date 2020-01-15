@@ -1,0 +1,20 @@
+{
+  "meshName": "mymesh",
+  "virtualRouterName": "my-vr",
+  "routeName": "my-r",
+  "spec": {
+    "httpRoute": {
+      "action": {
+        "weightedTargets": [
+          {
+            "virtualNode": "my-vn",
+            "weight": 100
+          }
+        ]
+      },
+      "match": {
+        "prefix": "/"
+      }
+    }
+  }
+}

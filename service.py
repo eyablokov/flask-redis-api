@@ -1,7 +1,7 @@
 import json
 from flask import Flask, Response, request
 import redis
-from datetime import datetime
+import datetime
 
 app = Flask(__name__)
 app.debug = True
@@ -16,7 +16,7 @@ def check_username(u):
 
 def check_birthday_format(b):
     try:
-        datetime.strptime(b, '%Y-%m-%d')
+        datetime.datetime.strptime(b, '%Y-%m-%d')
         return 0
     except ValueError:
         raise ValueError('Date of Birth has to be in YYYY-MM-DD format.')
@@ -30,15 +30,19 @@ def get_username_data(username):
     check_username(username)
     resp = {}
     birthday = db.get(username).decode().replace("\'", "\"")
-    today = datetime.now()
-    for date in birthday.keys():
-        if date.date() < today.date():
-            resp = '{"message": "Hello, {}! Happy birthday!"}'.format(username)
+    today = datetime.date.today()
+    date_dict = json.loads(birthday)
+    for birth in date_dict.values():
+        datetime_birth = datetime.datetime.strptime(birth, '%Y-%m-%d').date()
+        if datetime_birth == today:
+            return 'Hello, {}! Happy birthday!'.format(username)
+        if (today.month == datetime_birth.month and today.day >= datetime_birth.day or today.month > datetime_birth.month):
+            nextBirthdayYear = today.year + 1
         else:
-            num_days = max(date, today).days
-            resp = '{"message": "Hello, {}! Your birthday is in {} days."}'.format(username, num_days)
-    final = json.loads(resp)
-    return Response(json.dumps(final), status=200, mimetype='application/json')
+            nextBirthdayYear = today.year
+        nextBirthday = datetime.date(nextBirthdayYear, datetime_birth.month, datetime_birth.day)
+        diff = nextBirthday - today
+        return 'Hello, {}! Your birthday is in {} day(s)'.format(username, diff.days)
 
 @app.route('/hello/<username>', methods=['PUT'])
 def map_username_data(username):

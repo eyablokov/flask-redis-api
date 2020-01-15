@@ -1,7 +1,7 @@
+import datetime
 import json
 from flask import Flask, Response, request
 import redis
-import datetime
 
 app = Flask(__name__)
 app.debug = True
@@ -11,8 +11,7 @@ db = redis.Redis('localhost')
 def check_username(u):
     if not u.isalpha():
         raise ValueError('Username must contain letters only.')
-    else:
-        return 0
+    return 0
 
 def check_birthday_format(b):
     try:
@@ -28,7 +27,6 @@ def hello():
 @app.route('/hello/<username>', methods=['GET'])
 def get_username_data(username):
     check_username(username)
-    resp = {}
     birthday = db.get(username).decode().replace("\'", "\"")
     today = datetime.date.today()
     date_dict = json.loads(birthday)

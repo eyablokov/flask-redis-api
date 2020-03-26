@@ -61,7 +61,7 @@ jobs:
           command: |
             pwd
             ls -al
-            ls -al /app
+            cat /root/account.json
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo $ACCT_AUTH | base64 -d > /root/account.json
               cat /root/account.json

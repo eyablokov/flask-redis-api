@@ -58,6 +58,8 @@ jobs:
       - deploy:
           name: Deploy application Docker image
           command: |
+            pwd
+            ls -al
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo $ACCT_AUTH | base64 -d > ${HOME}/account.json
               cat ${HOME}/account.json

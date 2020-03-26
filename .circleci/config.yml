@@ -62,9 +62,9 @@ jobs:
             pwd
             ls -al
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo $ACCT_AUTH | base64 -d > ./account.json
-              cat ./account.json
-              gcloud auth activate-service-account --key-file ./account.json
+              echo $ACCT_AUTH | base64 -d > /app/account.json
+              cat /app/account.json
+              gcloud auth activate-service-account --key-file /app/account.json
               gcloud config set project $PROJECT_NAME
               gcloud --quiet config set container/cluster $CLUSTER_NAME
               gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}

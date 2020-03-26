@@ -60,9 +60,9 @@ jobs:
           name: Deploy application Docker image
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo $ACCT_AUTH | base64 -d > ${HOME}/account.json
-              cat ${HOME}/account.json
-              gcloud auth activate-service-account --key-file ${HOME}/account.json
+              echo $ACCT_AUTH | base64 -d > ./account.json
+              cat ./account.json
+              gcloud auth activate-service-account --key-file ./account.json
               gcloud config set project $PROJECT_NAME
               gcloud --quiet config set container/cluster $CLUSTER_NAME
               gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}

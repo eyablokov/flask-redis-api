@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "alien-trainer-269910",
+  "private_key_id": "4ce6a592830c3e974cd70a5bb21621616a42a970",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCwyDHmrBL0XsP2\nt78WQfAqEsT1ID3a9ca0iSnjaDYLTUYb51BqeODzDd5jCG9VeF2y44b2CbAUXtR8\nHqd//ZMVhqIqkAtU9yCqOg3ww+s7nf409HT3K/+bu0ftdZU9homml7gpWGnTawDy\nTVmFHIJZ4j599VjZkdVk4KsFfZnRrmmJZ3zmFsU94/vgm9o6zUBY6RcRCwWrn2z8\nFosegmlUyJIFhCtk5R5Q8CEagCYXpVGaauFiv/4StRsSDWHPJO9vI+qjtSO1Wiof\netwwia9Qiz+JT8C+uReZhesmldfCT02BqvLnALyavn0Vc9q8VIYb6TOeBV5dRYnG\nNDe4DvmRAgMBAAECggEAAdK4uAYphmFlUDmuI/C/ZTGvHA+Ob8AF4fYBq3WXTBfK\ni65fpQ9003DezKLpQgaFIduImGg6a4VcV+DZjZ97+TZ7nOiCI2jOio7hdqyQlBtx\npBJq0+M9Zjng2KU0Ki+lYwVQygVeRwbFGlqbnByyh/KGPjaN6WWAf8M05FA6qj/H\nraH7MziEnIX41F1uh/byH5USsBQMdY8zA23vwCXqDV6E03FYw1Ij7AaRC4NbVK74\ndtZX+cP2X6khxREDnfJokGzD++F1JvNljMBUY2QXnv42eMlwD2IXPr7XnFRvzmo8\nq8Zu3uQRyyrDjo1fQkdQeZ+8l050jBHCQFBASJvFAQKBgQDv/Fo768PJznbpM/lT\nK7rqF52ibl4SECkZ1slY0hRh9fjGmA6wwt/Z5RcyYli4m0pfLxtWqUMu3oNNkVC9\naLeRc7/88j8EDgzooF8lVBJdkfFLForOC1QhrdACIsIFUyMsgLnWe08e647cL4H+\nNGCIMX9AwSChU2JUuk7uvyc0EQKBgQC8lCP+8sLISS+sa9x4nDgJ0/IbJDgum1rW\nJplO3Q6M99rAmZE9lnUZ77Xeo4xhli/OXe/tKbiaITToFWP8/9GYL6FS0Pf7O1WW\nqdAMwg3sJ62FqKLSeoWgzqeGL5rEDMVa/3tmoZikXX4LHh/DkepU9gcyt2C+7FKJ\n0NqwqnrtgQKBgAmWMRyXrHiRUNq8Ase5xXu4ecmVUxixoJKxq9Vqfvny039Lb7rL\n7hlMN4MBvr2RJoVq4lKx7EchCGm+1lTarAqZbx/xpWbKEOXyEhrxotIuFE+FlQHq\nHfBCez66mLmRuqP6eHIC9wQrMMfG9hBrkzedkpHJpT4MkK8FykVrSWuhAoGBAJZk\nZpiqrmDgzR5rHvcpTx+3Yfv3VL8GstjbC6TzculFubWkQ0qktVsr6xVVxV0GU7X3\nAKNZhJmXJgR5GrbophUC11uewEYiOc3gO8YQ9N2Df0V7Ce9mOy/V35CKYpk7viEm\nYxmkgoGC9kSTj61+ry120KLH0GYzPlgesmn2a/cBAoGBAOi8z+jnluqbQAxgaj0Q\nw2I1ghjQVJcBkpbs+yEvL6zEODl9URgm6K78nWc1eAbH1ZCRcgdEzHELndWmwDxE\nKAQ+ZqNHTWhFWaazWLi10fFy4W5ZJ2PHYIeKZ9HWHEk2y+2Jd3yLGy+mIqnq+xCl\n4jtJRRQeMM8VPr8oskULFMI1\n-----END PRIVATE KEY-----\n",
+  "client_email": "terraform@alien-trainer-269910.iam.gserviceaccount.com",
+  "client_id": "104903788470043066846",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/terraform%40alien-trainer-269910.iam.gserviceaccount.com"
+}

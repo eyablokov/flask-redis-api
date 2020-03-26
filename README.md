@@ -1,5 +1,7 @@
 # Flask API with Redis storage & canary deployment with AWS Mesh on EKS
 
+![project system diagram](diagram.png)
+
 Clone this repository.
 
 ## Building & pushing Docker images
@@ -25,7 +27,7 @@ Create the mesh and the entire topology with the following command (make sure yo
 
 ```bash
 cd mesh
-./create_mesh.sh
+./create-mesh.sh
 cd ..
 ```
 
@@ -108,7 +110,3 @@ Finally, clean up the resources by deleting the EKS cluster and App Mesh resourc
 Hope this implemetation and walkthrough useful.
 
 As AWS App Mesh moves towards general availability, we can see additional features and integrations becoming available.
-
-## TODO
-
-There are no tests here, for both - API app itself & deploy.

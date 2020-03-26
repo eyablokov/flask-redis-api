@@ -14,11 +14,11 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}-{{ .Revision }}
-            - v1-{{ .Branch }}-
-            - v1-
+      # - restore_cache:
+      #     keys:
+      #       - v1-{{ .Branch }}-{{ .Revision }}
+      #       - v1-{{ .Branch }}-
+      #       - v1-
       - run:
           name: Install dependencies
           command: |
@@ -37,25 +37,26 @@ jobs:
           name: Check docker version
           command: |
             docker version
-      - run:
-          name: Load Docker image layer cache
-          command: |
-            set +o pipefail
-            docker load -i /caches/app.tar | true
+      # - run:
+      #     name: Load Docker image layer cache
+      #     command: |
+      #       set +o pipefail
+      #       docker load -i /caches/app.tar | true
       - run:
           name: Build application Docker image
+#            docker build --cache-from=europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest -t europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 .
           command: |
-            docker build --cache-from=europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest -t europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 .
+            docker build --no-cache -t europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 .
             docker tag europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
-      - run:
-          name: Save Docker image layer cache
-          command: |
-            mkdir -p /caches
-            docker save -o /caches/app.tar europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/app.tar
+      # - run:
+      #     name: Save Docker image layer cache
+      #     command: |
+      #       mkdir -p /caches
+      #       docker save -o /caches/app.tar europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
+      # - save_cache:
+      #     key: v1-{{ .Branch }}-{{ epoch }}
+      #     paths:
+      #       - /caches/app.tar
       - deploy:
           name: Deploy application Docker image
           command: |

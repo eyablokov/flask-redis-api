@@ -63,7 +63,7 @@ jobs:
             ls -al
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo $ACCT_AUTH | base64 -d > ${HOME}/account-auth.json
-              cat /app/account.json
+              cat ${HOME}/account-auth.json
               gcloud auth activate-service-account --key-file ${HOME}/account-auth.json
               gcloud config set project $PROJECT_NAME
               gcloud --quiet config set container/cluster $CLUSTER_NAME

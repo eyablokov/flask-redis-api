@@ -37,26 +37,25 @@ jobs:
           name: Check docker version
           command: |
             docker version
-      # - run:
-      #     name: Load Docker image layer cache
-      #     command: |
-      #       set +o pipefail
-      #       docker load -i /caches/app.tar | true
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/app.tar | true
       - run:
           name: Build application Docker image
-      #      docker build --cache-from=europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest -t europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 .
           command: |
-            docker build -t europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 .
-            docker tag europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
-      # - run:
-      #     name: Save Docker image layer cache
-      #     command: |
-      #       mkdir -p /caches
-      #       docker save -o /caches/app.tar europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
-      # - save_cache:
-      #     key: v1-{{ .Branch }}-{{ epoch }}
-      #     paths:
-      #       - /caches/app.tar
+            docker build --cache-from=eu.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest -t eu.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 .
+            docker tag eu.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:$CIRCLE_SHA1 eu.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar eu.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar
       - deploy:
           name: Deploy application Docker image
           command: |
@@ -72,6 +71,7 @@ jobs:
               gcloud --quiet container clusters get-credentials "${CLUSTER_NAME}"
               gcloud config set container/use_client_certificate True
               gcloud auth configure-docker
-              docker push europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:${CIRCLE_SHA1}
-              docker push europe.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
+              docker push eu.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:${CIRCLE_SHA1}
+              docker push eu.gcr.io/${PROJECT_NAME}/${IMAGE_NAME}:latest
+              ./deploy.sh
             fi

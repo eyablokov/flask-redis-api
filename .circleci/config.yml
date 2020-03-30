@@ -7,7 +7,7 @@ jobs:
       CLUSTER_NAME: my-cool-gke-cluster
       CLOUDSDK_COMPUTE_ZONE: europe-west1-b
       DEBIAN_FRONTEND: noninteractive
-      GOOGLE_APPLICATION_CREDENTIALS: /app/account.json
+      GOOGLE_APPLICATION_CREDENTIALS: ${HOME}/account-auth.json
       IMAGE_NAME: flask
     docker:
       - image: google/cloud-sdk:241.0.0-slim
@@ -62,9 +62,9 @@ jobs:
             pwd
             ls -al
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo $ACCT_AUTH | base64 -d > /app/account.json
+              echo $ACCT_AUTH | base64 -d > ${HOME}/account-auth.json
               cat /app/account.json
-              gcloud auth activate-service-account --key-file /app/account.json
+              gcloud auth activate-service-account --key-file ${HOME}/account-auth.json
               gcloud config set project $PROJECT_NAME
               gcloud --quiet config set container/cluster $CLUSTER_NAME
               gcloud config set compute/zone ${CLOUDSDK_COMPUTE_ZONE}
